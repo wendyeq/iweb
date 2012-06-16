@@ -1,7 +1,7 @@
 package blog
 
 import (
-    "testing"
+	"testing"
 	"launchpad.net/mgo"
 )
 
