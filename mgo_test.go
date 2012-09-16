@@ -1,8 +1,8 @@
-package blog
+package main
 
 import (
+	"labix.org/v2/mgo"
 	"testing"
-	"launchpad.net/mgo"
 )
 
 func TestSession(t *testing.T) {
@@ -10,6 +10,5 @@ func TestSession(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-
 	defer session.Close()
 }

@@ -1,15 +1,15 @@
-package blog
+package main
 
 import (
+	"labix.org/v2/mgo/bson"
 	"testing"
-    "time"
-	"launchpad.net/mgo/bson"
+	"time"
 )
 
 func TestSave(t *testing.T) {
 	postTime, _ := time.Parse("2006-01-02", "2012-06-01")
 	updateTime, _ := time.Parse("2006-01-02", "2012-06-02")
-	article := &Article{Id: bson.NewObjectId(), Author: "wendyeq",Title: "Test1", Content: "good content", Tags: nil, PostTime: postTime, UpdateTime: updateTime}
+	article := &Article{Id: bson.NewObjectId(), Author: "wendyeq", Title: "Test1", Content: "good content" + time.Now().Format(time.RFC3339), Tags: nil, PostTime: postTime, UpdateTime: updateTime}
 	err := article.Save()
 	if err != nil {
 		t.Errorf("insert error: %s", err)
@@ -20,11 +20,11 @@ func TestSave(t *testing.T) {
 func TestFindOne(t *testing.T) {
 	postTime, _ := time.Parse("2006-01-02", "2012-06-01")
 	updateTime, _ := time.Parse("2006-01-02", "2012-06-02")
-	article := &Article{Id: bson.NewObjectId(), Author: "wendyeq",Title: "Test1", Content: "good", Tags: nil, PostTime: postTime, UpdateTime: updateTime}
+	article := &Article{Id: bson.NewObjectId(), Author: "wendyeq", Title: "Test1", Content: "good", Tags: nil, PostTime: postTime, UpdateTime: updateTime}
 	err := article.FindOne()
 	if err != nil || article.Content == "good" {
 		t.Errorf("find one article content is: %s, error: %s", article.Content, err)
-	} 
+	}
 }
 
 func TestFindAll(t *testing.T) {
