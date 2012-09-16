@@ -32,6 +32,7 @@ func (a *Article) Save() (err error) {
 		panic(err)
 	}
 	defer conn.Close()
+
 	db := conn.DB(DATABASE)
 	articles := db.C("articles")
 	return articles.Insert(a)
